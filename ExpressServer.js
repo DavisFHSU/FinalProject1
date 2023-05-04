@@ -22,7 +22,7 @@ app.use("/subdir", express.static(path.join(__dirname, "/public")));
 app.use("/", require("./routes/root"));
 app.use("/subdir", require("./routes/subdir"));
 // API Route
-app.use("/employees", require("./routes/api/employees"));
+app.use("/states", require("./routes/api/states"));
 
 // Handel un-defined routes
 app.all("*", (req, res) => {
