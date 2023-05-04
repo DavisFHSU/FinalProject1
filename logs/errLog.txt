@@ -1,0 +1,6 @@
+04-06-2023	12:17:51 	 6c75c1bf-da08-4167-8c43-ee522a44a883 	 Error Not allowed by CORS 
+04-06-2023	12:17:51 	 519d14af-ae02-49c1-a145-8dca4b6e9f7d 	 Error Not allowed by CORS 
+04-10-2023	10:45:19 	 1e3d61e4-588c-4c78-8b3d-7712cc7f5ae0 	 TypeError Cannot read properties of undefined (reading 'id') 
+04-10-2023	10:49:21 	 af09ff40-9dc0-4804-ab11-d2983b0c20b8 	 ReferenceError re is not defined 
+04-10-2023	10:59:04 	 dd1193c9-1d1f-4cd5-a02c-33e9b51159b0 	 ReferenceError re is not defined 
+04-10-2023	11:18:06 	 762ec140-e6bf-46cc-ac68-26cc1abd7586 	 ReferenceError re is not defined 
