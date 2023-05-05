@@ -5,8 +5,43 @@ const data = {
   },
 };
 
+
+const State = require("../model/states");
+
+const abb = [ "AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI",
+ "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MP", "MS", "MT", "NC",
+ "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", 
+"OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UM", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
+
+
+const FilterAllStates = (req, res) => {
+  const queryObject = req.query; // This will return an object containing all the key-value pairs in the URL query string
+  const conFigValue = queryObject.contig;
+  if (!conFigValue) {
+      res.json(data.states);    
+  }
+  
+  else if (conFigValue === "false") {
+    const filteredArray = data.states.filter(
+      (emp) => (emp.code === "AK" || emp.code === "HI")
+    ); //  Alaska and Hawaii Only
+    
+    res.json(filteredArray);
+  
+  }
+    else if (conFigValue === "true") {
+      const filteredArray = data.states.filter(
+        (emp) => (emp.code !== "AK" && emp.code !== "HI")
+      ); //  Alaska and Hawaii Only
+      
+      res.json(filteredArray);
+  };
+};
+
+
 // Get all states
 const getAllStates = (req, res) => {
+  console.log("getall"); 
   res.json(data.states);
 };
 
@@ -15,7 +50,7 @@ const getAllStates = (req, res) => {
 
 const getState = (req, res) => {
   const stateId = req.params.id; // Get stateId from URL parameter
-  console.log(stateId);
+   
   const state = data.states.filter((emp) => emp.code === stateId);
   if (!state) {
     return res
@@ -28,8 +63,8 @@ const getState = (req, res) => {
 //get contiguous states
 
 const getContigStates = (req, res) => {
-    const filteredArray = data.states.filter((emp) => emp.code !== "UT"); // Exclude Alaska and Hawaii 
-console.log("test");
+  const filteredArray = data.states.filter((emp) => emp.code !== "UT"); // Exclude Alaska and Hawaii 
+  console.log("contigTest");
   res.json(filteredArray);
 };
 
@@ -45,11 +80,41 @@ res.json(filteredArray);
 
 //get random funfact-mongo
 
-const getStateFF  = (req, res) => {
-  const stateId = req.params.id; // Get stateId from URL parameter
-  
-  
-  ///res.json(XXX);
+const getStateFF = async (req, res) => {
+  if (!req.params.id) {
+    return res.status(400).json({ message: "stateCode is required. " });
+  }
+
+  if (!abb.includes(req.params.id,0)) {
+  return res.status(404).json({ message: "Invalid State Code. " });
+  }
+
+ let state = await State.findOne({ stateCode: req.params.id }).exec();
+
+ console.log(state);
+
+  if (!state) {
+    return res
+      .status(404)
+      .json({ message: "No stateCode matches. " });
+  }
+
+  const length = state.funfacts.length;
+
+  console.log(length);
+
+  const index = Math.floor(Math.random() * length);
+
+  console.log(index);
+
+  const filteredState = {
+    name: state.stateCode,
+    funfact: state.funfacts[index],
+  };
+
+  res.json(filteredState);
+
+ 
 };
 
 
@@ -62,9 +127,12 @@ const getStateCap = (req, res) => {
       .json({ message: `State ${stateId} is not found` });
   }
 
-  // const result = state.
+  const filteredState = {
+    name: state.state,
+    capital: state.capital_city,
+  };
 
-  // res.json(result);
+  res.json(filteredState);
 };
 
 const getStateNick = (req, res) => {
@@ -76,9 +144,12 @@ const getStateNick = (req, res) => {
       .json({ message: `State ${stateId} is not found` });
   }
 
-  // const result = state.
+  const filteredState = {
+    name: state.state,
+    nickname: state.nickname,
+  };
 
-  // res.json(result);
+  res.json(filteredState);
 };
 
 const getStatePop = (req, res) => {
@@ -90,9 +161,12 @@ const getStatePop = (req, res) => {
       .json({ message: `State ${stateId} is not found` });
   }
 
-  // const result = state.
+  const filteredState = {
+    name: state.state,
+    population: state.population,
+  };
 
-  // res.json(result);
+  res.json(filteredState);
 };
 
 const getStateAdmis = (req, res) => {
@@ -104,23 +178,64 @@ const getStateAdmis = (req, res) => {
       .json({ message: `State ${stateId} is not found` });
   }
 
-  // const result = state.
+  const filteredState = {
+    name: state.state,
+    admission: state.admission_date,
+  };
 
-  // res.json(result);
+  res.json(filteredState);
 };
 
-const postStateFF = (req, res) => {
-  const stateId = req.params.id; // Get stateId from URL parameter
-  const state = data.states.find((emp) => emp.code === stateId);
-  if (!state) {
-    return res
-      .status(400)
-      .json({ message: `State ${stateId} is not found` });
+// const postStateFF = await (req, res) => {
+//   if (!abb.includes(req.params.id,0)) {
+//     return res.status(404).json({ message: "Invalid State Code. " });
+//   }
+
+//   if (!req.body.funFacts) {
+//     return res.status(400).json({ message: "funFact parameter is required. " });
+//   }
+
+//   const state = await State.findOne({ stateCode: req.params.id }).exec();
+
+//   if (!state) {
+//     return res
+//       .status(404)
+//       .json({ message: `No State matches ${req.params.id}` });
+//   }
+ 
+//   await State.updateOne(
+//     { stateCode: req.params.id },
+//     { $push: { funFacts: req.body.funFacts } }
+//   );
+
+//   res.json({ message: "Fun facts updated successfully." });
+// };
+
+
+const postStateFF = async (req, res) => {
+ 
+  if (!abb.includes(req.params.id,0)) {
+    return res.status(404).json({ message: "Invalid State Code. " });
   }
 
-  // const result = state.
+  if (!req.body.funfact) {
+    return res.status(400).json({ message: "funfact parameter is required. " });
+  }
 
-  // res.json(result);
+  const state = await State.findOne({ stateCode: req.params.id }).exec();
+
+  if (!state) {
+    return res
+      .status(404)
+      .json({ message: `No State matches ${req.params.id}` });
+  }
+ 
+  await State.updateOne(
+    { stateCode: req.params.id },
+    { $push: { funfacts: req.body.funfact } }
+  );
+
+  res.json({ message: "funfacts updated successfully." });
 };
 
 const patchStateFF = (req, res) => {
@@ -151,9 +266,25 @@ const deleteStateFF = (req, res) => {
   // res.json(result);
 };
 
-
+const CreateNewState = async (req, res) => {
+  if (!req.body.stateCode) {
+    return res
+      .status(400)
+      .json({ message: "stateCode is required" });
+  }
+  try {
+    const result = await State.create({
+      stateCode: req.body.stateCode,
+      //stateName: req.body.stateName,
+    });
+    res.status(201).json(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 module.exports = {
+  FilterAllStates,
   getAllStates,
   getContigStates,
   getNonContigStates,
@@ -166,5 +297,6 @@ module.exports = {
   postStateFF,
   patchStateFF,
   deleteStateFF,
+  CreateNewState,
 
 };

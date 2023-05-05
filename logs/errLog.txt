@@ -1,2 +1,22 @@
 05-04-2023	12:36:36 	 df3e78fd-12fc-4e8e-a4be-5dab4743998e 	 ReferenceError parse is not defined 
 05-04-2023	01:06:07 	 ac071648-518c-4934-8b09-d010481467c3 	 ReferenceError stateID is not defined 
+05-04-2023	06:02:15 	 36674efc-aa9e-4068-854d-e9c7bfdc048b 	 TypeError Cannot read properties of undefined (reading 'length') 
+05-04-2023	06:25:33 	 fcbcf643-a9cd-4579-af2a-e2922a9fc1dd 	 ReferenceError results is not defined 
+05-04-2023	06:26:39 	 d41e26a9-2af6-4f83-a81c-db3908f21255 	 ReferenceError results is not defined 
+05-04-2023	06:29:29 	 94f1c1c4-d1e8-42c4-89a3-ef345b9ea974 	 TypeError undefined is not a function 
+05-04-2023	06:31:33 	 fea2c656-3107-448f-82dc-d106370d9eba 	 ReferenceError results is not defined 
+05-04-2023	07:15:38 	 5631d1f8-f62e-44b6-abf0-b78c28718c04 	 ReferenceError checkId is not defined 
+05-04-2023	07:17:39 	 3590a13f-86db-4929-ab97-77b1a5d58282 	 TypeError Cannot read properties of undefined (reading 'params') 
+05-04-2023	07:20:37 	 eb2e60cc-7d8e-4d86-88fb-a7dae0c68ebf 	 TypeError Cannot read properties of undefined (reading 'params') 
+05-04-2023	08:15:25 	 d242e644-1b11-4ce2-b173-4bc1286adef3 	 ReferenceError cabbreviations is not defined 
+05-04-2023	08:15:42 	 520f1934-a5ae-46ab-b80f-0ea56806da1b 	 TypeError Cannot read properties of undefined (reading 'toUpperCase') 
+05-04-2023	08:19:05 	 625ddfd8-6d21-4a0b-86ef-cd4a09f2a6cf 	 TypeError Cannot read properties of undefined (reading 'toUpperCase') 
+05-04-2023	08:25:24 	 a972203f-ee5c-40c1-8b6a-df8dba913ed1 	 TypeError Cannot read properties of undefined (reading 'params') 
+05-04-2023	08:25:57 	 5c76873b-21db-411e-8ba8-723e13daae86 	 TypeError Cannot read properties of undefined (reading 'params') 
+05-04-2023	08:26:13 	 61b7c52b-755e-4870-b224-b2427328762c 	 TypeError Cannot read properties of undefined (reading 'params') 
+05-04-2023	08:26:52 	 200cdec9-7837-47bd-ad3f-193ab567c6e2 	 TypeError Cannot read properties of undefined (reading 'params') 
+05-04-2023	08:28:06 	 0935acc7-7269-4525-833f-d943384ed31e 	 TypeError Cannot read properties of undefined (reading 'params') 
+05-04-2023	09:07:38 	 5c5ad43d-d0d8-4516-a211-e07efb908893 	 ReferenceError user is not defined 
+05-04-2023	09:24:36 	 06e8c401-052f-43e6-853a-8b39aece6dda 	 ReferenceError checkID is not defined 
+05-04-2023	09:24:36 	 45de3085-8faf-4763-a9f4-d06b08110418 	 ReferenceError checkID is not defined 
+05-04-2023	09:25:00 	 f1e6efe8-f09a-4f47-a762-800f04959412 	 ReferenceError abbreviations is not defined 
