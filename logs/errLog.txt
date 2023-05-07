@@ -20,3 +20,14 @@
 05-04-2023	09:24:36 	 06e8c401-052f-43e6-853a-8b39aece6dda 	 ReferenceError checkID is not defined 
 05-04-2023	09:24:36 	 45de3085-8faf-4763-a9f4-d06b08110418 	 ReferenceError checkID is not defined 
 05-04-2023	09:25:00 	 f1e6efe8-f09a-4f47-a762-800f04959412 	 ReferenceError abbreviations is not defined 
+05-06-2023	09:03:13 	 74c7a2a1-f6ee-4a3e-8b39-e9d434ba1170 	 SyntaxError Unexpected token = in JSON at position 17 
+05-06-2023	09:03:24 	 55b07561-7037-4c31-9a5a-06de60c605c0 	 SyntaxError Unexpected token = in JSON at position 18 
+05-06-2023	09:04:40 	 1df7e115-06fc-4484-a3cf-432a08ebd268 	 SyntaxError Unexpected token = in JSON at position 19 
+05-06-2023	09:04:58 	 80dcf802-f660-4a2f-ad1f-9dd267325515 	 SyntaxError Unexpected token = in JSON at position 19 
+05-06-2023	09:05:28 	 b3a3278c-a4e6-4fb7-bdac-2e0ab24848ee 	 SyntaxError Unexpected token = in JSON at position 19 
+05-06-2023	09:06:20 	 c778872e-e8ca-4a74-b859-080768c92fe9 	 SyntaxError Unexpected token = in JSON at position 18 
+05-06-2023	09:08:42 	 7d47077d-1b5a-40b2-8473-05912499a1ca 	 SyntaxError Unexpected string in JSON at position 21 
+05-06-2023	10:55:23 	 b097938e-cf08-426f-9ecb-a7e24f51388b 	 SyntaxError Unexpected token ' in JSON at position 20 
+05-06-2023	10:56:17 	 91ac0f7a-f8de-4feb-9bf9-2e8d13925a6e 	 SyntaxError Unexpected string in JSON at position 25 
+05-06-2023	10:56:50 	 9d9e7efe-d4a6-40a8-b738-9d430c2dec95 	 SyntaxError Unexpected string in JSON at position 25 
+05-06-2023	11:00:41 	 b4729fb1-d747-4617-b70a-ab2752fb1009 	 SyntaxError Unexpected string in JSON at position 21 

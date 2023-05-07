@@ -14,27 +14,50 @@ const abb = [ "AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", 
 "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UM", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
 
 
-const FilterAllStates = (req, res) => {
+const FilterAllStates = async (req, res) => {
   const queryObject = req.query; // This will return an object containing all the key-value pairs in the URL query string
   const conFigValue = queryObject.contig;
+
+  
+
+
   if (!conFigValue) {
-      res.json(data.states);    
+
+    const state1 = await State.find().exec();
+    const state2 = data.states;
+    const state3 = {...state1, ...state2}
+    res.json(state3); 
+      // res.json(data.states);    
   }
   
   else if (conFigValue === "false") {
-    const filteredArray = data.states.filter(
-      (emp) => (emp.code === "AK" || emp.code === "HI")
+
+    const state1 = await State.find().exec();
+    const state2 = data.states;
+    const state3 = {...state1, ...state2};
+    const stateArray = Object.values(state3);
+
+
+    const filteredArray = stateArray.filter(
+      (state) => (state.code === "AK" || state.code === "HI")
     ); //  Alaska and Hawaii Only
     
-    res.json(filteredArray);
+      res.json(filteredArray);
   
   }
     else if (conFigValue === "true") {
-      const filteredArray = data.states.filter(
-        (emp) => (emp.code !== "AK" && emp.code !== "HI")
-      ); //  Alaska and Hawaii Only
-      
+    const state1 = await State.find().exec();
+    const state2 = data.states;
+    const state3 = {...state1, ...state2};
+    const stateArray = Object.values(state3);
+
+
+    const filteredArray = stateArray.filter(
+      (state) => (state.code !== "AK" || state.code !== "HI")
+    ); //  Alaska and Hawaii Only
+    
       res.json(filteredArray);
+
   };
 };
 
@@ -48,16 +71,35 @@ const getAllStates = (req, res) => {
 
 // Get a State
 
-const getState = (req, res) => {
+const getState = async (req, res) => {
+
+  if (!abb.includes(req.params.id,0)) {
+    return res.status(404).json({ message: "Invalid State Code. " });
+    }
+
   const stateId = req.params.id; // Get stateId from URL parameter
    
-  const state = data.states.filter((emp) => emp.code === stateId);
-  if (!state) {
-    return res
-      .status(400)
-      .json({ message: `State ${stateId} is not found` });
-  }
-  res.json(state);
+  const state1 = await State.find().exec();
+  const state2 = data.states;
+  const state3 = {...state1, ...state2};
+  const stateArray = Object.values(state3);
+
+
+  const filteredArray = stateArray.filter(
+    (state) => (state.code === req.params.id)
+  ); //  Alaska and Hawaii Only
+  
+    res.json(filteredArray);
+
+
+
+  // const state = data.states.filter((emp) => emp.code === stateId);
+  // if (!state) {
+  //   return res
+  //     .status(400)
+  //     .json({ message: `State ${stateId} is not found` });
+  // }
+  // res.json(state);
 };
 
 //get contiguous states
@@ -119,6 +161,9 @@ const getStateFF = async (req, res) => {
 
 
 const getStateCap = (req, res) => {
+  if (!abb.includes(req.params.id,0)) {
+    return res.status(404).json({ message: "Invalid State Code. " });
+    }
   const stateId = req.params.id; // Get stateId from URL parameter
   const state = data.states.find((emp) => emp.code === stateId);
   if (!state) {
@@ -136,6 +181,9 @@ const getStateCap = (req, res) => {
 };
 
 const getStateNick = (req, res) => {
+  if (!abb.includes(req.params.id,0)) {
+    return res.status(404).json({ message: "Invalid State Code. " });
+    }
   const stateId = req.params.id; // Get stateId from URL parameter
   const state = data.states.find((emp) => emp.code === stateId);
   if (!state) {
@@ -153,6 +201,9 @@ const getStateNick = (req, res) => {
 };
 
 const getStatePop = (req, res) => {
+  if (!abb.includes(req.params.id,0)) {
+    return res.status(404).json({ message: "Invalid State Code. " });
+    }
   const stateId = req.params.id; // Get stateId from URL parameter
   const state = data.states.find((emp) => emp.code === stateId);
   if (!state) {
@@ -170,6 +221,9 @@ const getStatePop = (req, res) => {
 };
 
 const getStateAdmis = (req, res) => {
+  if (!abb.includes(req.params.id,0)) {
+    return res.status(404).json({ message: "Invalid State Code. " });
+    }
   const stateId = req.params.id; // Get stateId from URL parameter
   const state = data.states.find((emp) => emp.code === stateId);
   if (!state) {
@@ -186,30 +240,6 @@ const getStateAdmis = (req, res) => {
   res.json(filteredState);
 };
 
-// const postStateFF = await (req, res) => {
-//   if (!abb.includes(req.params.id,0)) {
-//     return res.status(404).json({ message: "Invalid State Code. " });
-//   }
-
-//   if (!req.body.funFacts) {
-//     return res.status(400).json({ message: "funFact parameter is required. " });
-//   }
-
-//   const state = await State.findOne({ stateCode: req.params.id }).exec();
-
-//   if (!state) {
-//     return res
-//       .status(404)
-//       .json({ message: `No State matches ${req.params.id}` });
-//   }
- 
-//   await State.updateOne(
-//     { stateCode: req.params.id },
-//     { $push: { funFacts: req.body.funFacts } }
-//   );
-
-//   res.json({ message: "Fun facts updated successfully." });
-// };
 
 
 const postStateFF = async (req, res) => {
@@ -238,33 +268,101 @@ const postStateFF = async (req, res) => {
   res.json({ message: "funfacts updated successfully." });
 };
 
-const patchStateFF = (req, res) => {
+
+
+const patchStateFF = async (req, res) => {
+
+  if (!abb.includes(req.params.id,0)) {
+    return res.status(404).json({ message: "Invalid State Code. " });
+  }
+
+  if (!req.body.index || req.body.index <1) {
+    return res.status(400).json({ message: "index parameter (not zero based) is required. " });
+  }
+
+  if (!req.body.funfact) {
+    return res.status(400).json({ message: "funfact parameter is required. " });
+  }
+
   const stateId = req.params.id; // Get stateId from URL parameter
-  const state = data.states.find((emp) => emp.code === stateId);
+  const index = req.body.index;
+  //const funfact = req.body.funfact;
+
+  const state = await State.findOne({ stateCode: req.params.id }).exec();
   if (!state) {
     return res
       .status(400)
       .json({ message: `State ${stateId} is not found` });
   }
 
-  // const result = state.
+  if (!state.funfacts.length) {
+    return res.status(400).json({ message: "No funfacts exists to replace" });
+  }
+  
+  if (index > state.funfacts.length) {
+    return res.status(400).json({ message: "index parameter is too big. " });
+  }
 
-  // res.json(result);
+  console.log(req.params.id);
+
+  state.funfacts[req.body.index-1] = req.body.funfact;
+
+  await State.deleteOne(
+    {stateCode: req.params.id}
+  );
+
+  const result = await State.create({
+    stateCode: req.params.id,
+    funfacts: state.funfacts,
+  });
+
+  res.json({ message: "funfacts updated successfully." });
+  
 };
 
-const deleteStateFF = (req, res) => {
-  const stateId = req.params.id; // Get stateId from URL parameter
-  const state = data.states.find((emp) => emp.code === stateId);
+const deleteStateFF = async (req, res) => {
+  if (!abb.includes(req.params.id,0)) {
+    return res.status(404).json({ message: "Invalid State Code. " });
+  }
+
+  if (!req.body.index || req.body.index <1) {
+    return res.status(400).json({ message: "index parameter (not zero based) is required. " });
+  }
+
+ 
+
+  const state = await State.findOne({ stateCode: req.params.id }).exec();
   if (!state) {
     return res
       .status(400)
       .json({ message: `State ${stateId} is not found` });
   }
 
-  // const result = state.
+  if (!state.funfacts.length) {
+    return res.status(400).json({ message: "No funfacts exists to delete" });
+  }
+  
+  if (req.body.index  > state.funfacts.length) {
+    return res.status(400).json({ message: "index parameter is too big. " });
+  }
 
-  // res.json(result);
+  await State.updateOne (
+    {stateCode: req.params.id},
+    { $unset: { [`funfacts.${req.body.index-1}`]: "" } }
+  );
+
+  await State.updateOne(
+    { stateCode: req.params.id },
+    { $pull: { "funfacts": null } }
+  );
+
+  
+  res.json({ message: "funfacts deleted successfully." });
 };
+
+
+
+
 
 const CreateNewState = async (req, res) => {
   if (!req.body.stateCode) {
