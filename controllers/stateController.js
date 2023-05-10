@@ -20,9 +20,6 @@ const FilterAllStates = async (req, res) => {
   const queryObject = req.query; // This will return an object containing all the key-value pairs in the URL query string
   const conFigValue = queryObject.contig;
 
-  
-
-
   if (!conFigValue) {
 
     const state1 = await State.find().exec();
@@ -56,7 +53,7 @@ const FilterAllStates = async (req, res) => {
 
     const filteredArray = stateArray.filter(
       (state) => (state.code !== "AK" || state.code !== "HI")
-    ); //  Alaska and Hawaii Only
+    ); //  Not Alaska and Hawaii
     
       res.json(filteredArray);
 
@@ -131,7 +128,7 @@ const getStateFF = async (req, res) => {
     return res.status(400).json({ message: "stateCode is required. " });
   }
 
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
   return res.status(404).json({ message: "Invalid State Code. " });
   }
 
