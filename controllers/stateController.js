@@ -132,7 +132,7 @@ const getStateFF = async (req, res) => {
   return res.status(404).json({ message: "Invalid State Code. " });
   }
 
- let state = await State.findOne({ stateCode: req.params.id }).exec();
+ let state = await State.findOne({ stateCode: req.params.id.toUpperCase() }).exec();
 
  console.log(state);
 
