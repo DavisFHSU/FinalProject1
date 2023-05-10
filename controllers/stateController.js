@@ -162,10 +162,11 @@ const getStateFF = async (req, res) => {
 
 
 const getStateCap = (req, res) => {
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
     return res.status(404).json({ message: "Invalid State Code. " });
     }
-  const stateId = req.params.id; // Get stateId from URL parameter
+
+  const stateId = req.params.id.toUpperCase(); // Get stateId from URL parameter
   const state = data.states.find((emp) => emp.code === stateId);
   if (!state) {
     return res
@@ -182,10 +183,10 @@ const getStateCap = (req, res) => {
 };
 
 const getStateNick = (req, res) => {
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
     return res.status(404).json({ message: "Invalid State Code. " });
     }
-  const stateId = req.params.id; // Get stateId from URL parameter
+  const stateId = req.params.id.toUpperCase(); // Get stateId from URL parameter
   const state = data.states.find((emp) => emp.code === stateId);
   if (!state) {
     return res
@@ -202,10 +203,10 @@ const getStateNick = (req, res) => {
 };
 
 const getStatePop = (req, res) => {
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
     return res.status(404).json({ message: "Invalid State Code. " });
     }
-  const stateId = req.params.id; // Get stateId from URL parameter
+  const stateId = req.params.id.toUpperCase(); // Get stateId from URL parameter
   const state = data.states.find((emp) => emp.code === stateId);
   if (!state) {
     return res
@@ -222,10 +223,10 @@ const getStatePop = (req, res) => {
 };
 
 const getStateAdmis = (req, res) => {
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
     return res.status(404).json({ message: "Invalid State Code. " });
     }
-  const stateId = req.params.id; // Get stateId from URL parameter
+  const stateId = req.params.id.toUpperCase(); // Get stateId from URL parameter
   const state = data.states.find((emp) => emp.code === stateId);
   if (!state) {
     return res
@@ -245,7 +246,7 @@ const getStateAdmis = (req, res) => {
 
 const postStateFF = async (req, res) => {
  
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
     return res.status(404).json({ message: "Invalid State Code. " });
   }
 
@@ -253,7 +254,7 @@ const postStateFF = async (req, res) => {
     return res.status(400).json({ message: "funfact parameter is required. " });
   }
 
-  const state = await State.findOne({ stateCode: req.params.id }).exec();
+  const state = await State.findOne({ stateCode: req.params.id.toUpperCase() }).exec();
 
   if (!state) {
     return res
@@ -262,7 +263,7 @@ const postStateFF = async (req, res) => {
   }
  
   await State.updateOne(
-    { stateCode: req.params.id },
+    { stateCode: req.params.id.toUpperCase() },
     { $push: { funfacts: req.body.funfact } }
   );
 
@@ -273,7 +274,7 @@ const postStateFF = async (req, res) => {
 
 const patchStateFF = async (req, res) => {
 
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
     return res.status(404).json({ message: "Invalid State Code. " });
   }
 
@@ -289,7 +290,7 @@ const patchStateFF = async (req, res) => {
   const index = req.body.index;
   //const funfact = req.body.funfact;
 
-  const state = await State.findOne({ stateCode: req.params.id }).exec();
+  const state = await State.findOne({ stateCode: req.params.id.toUpperCase() }).exec();
   if (!state) {
     return res
       .status(400)
@@ -309,11 +310,11 @@ const patchStateFF = async (req, res) => {
   state.funfacts[req.body.index-1] = req.body.funfact;
 
   await State.deleteOne(
-    {stateCode: req.params.id}
+    {stateCode: req.params.id.toUpperCase()}
   );
 
   const result = await State.create({
-    stateCode: req.params.id,
+    stateCode: req.params.id.toUpperCase(),
     funfacts: state.funfacts,
   });
 
