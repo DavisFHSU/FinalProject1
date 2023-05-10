@@ -259,7 +259,7 @@ const postStateFF = async (req, res) => {
   if (!state) {
     return res
       .status(404)
-      .json({ message: `No State matches ${req.params.id}` });
+      .json({ message: `No State matches` });
   }
  
   await State.updateOne(
@@ -294,7 +294,7 @@ const patchStateFF = async (req, res) => {
   if (!state) {
     return res
       .status(400)
-      .json({ message: `State ${stateId} is not found` });
+      .json({ message: `State is not found` });
   }
 
   if (!state.funfacts.length) {
@@ -323,7 +323,7 @@ const patchStateFF = async (req, res) => {
 };
 
 const deleteStateFF = async (req, res) => {
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
     return res.status(404).json({ message: "Invalid State Code. " });
   }
 
@@ -333,11 +333,11 @@ const deleteStateFF = async (req, res) => {
 
  
 
-  const state = await State.findOne({ stateCode: req.params.id }).exec();
+  const state = await State.findOne({ stateCode: req.params.id.toUpperCase() }).exec();
   if (!state) {
     return res
       .status(400)
-      .json({ message: `State ${stateId} is not found` });
+      .json({ message: `State is not found` });
   }
 
   if (!state.funfacts.length) {
@@ -349,12 +349,12 @@ const deleteStateFF = async (req, res) => {
   }
 
   await State.updateOne (
-    {stateCode: req.params.id},
+    {stateCode: req.params.id.toUpperCase()},
     { $unset: { [`funfacts.${req.body.index-1}`]: "" } }
   );
 
   await State.updateOne(
-    { stateCode: req.params.id },
+    { stateCode: req.params.id.toUpperCase() },
     { $pull: { "funfacts": null } }
   );
 
