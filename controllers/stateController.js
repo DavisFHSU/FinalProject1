@@ -5,6 +5,8 @@ const data = {
   },
 };
 
+// https://glitch.com/edit/#!/import/github/DavisFHSU/FinalProject1.git
+//https://pie-petalite-velvet.glitch.me/
 
 const State = require("../model/states");
 
@@ -73,9 +75,11 @@ const getAllStates = (req, res) => {
 
 const getState = async (req, res) => {
 
-  if (!abb.includes(req.params.id,0)) {
+  if (!abb.includes(req.params.id.toUpperCase(),0)) {
     return res.status(404).json({ message: "Invalid State Code. " });
     }
+console.log(req.params.id);
+  console.log(req.params.id.toUpperCase());
 
   const stateId = req.params.id; // Get stateId from URL parameter
    
@@ -86,8 +90,8 @@ const getState = async (req, res) => {
 
 
   const filteredArray = stateArray.filter(
-    (state) => (state.code === req.params.id)
-  ); //  Alaska and Hawaii Only
+    (state) => (state.code === req.params.id.toUpperCase())
+  ); 
   
     res.json(filteredArray);
 

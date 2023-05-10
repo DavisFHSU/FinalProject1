@@ -514,3 +514,12 @@
 05-07-2023	12:10:59 	 b35e6db1-6b5d-49f3-ae2a-6973fce1ce0f 	 GET 	 undefined 	 /states/?contig=true 
 05-07-2023	12:14:59 	 8560654d-f62f-432a-959c-1283b5c7e0b4 	 GET 	 undefined 	 /states/UT 
 05-07-2023	12:15:26 	 507245f4-ba2f-4393-a88e-8e4cf8a71bb2 	 GET 	 undefined 	 /states/KS 
+05-09-2023	07:58:37 	 5faef3da-2b03-4a1a-88a8-2b0c913b5fe8 	 GET 	 undefined 	 / 
+05-09-2023	07:58:37 	 238c3d05-0532-4102-aee4-3c63cf54e2e2 	 GET 	 undefined 	 /css/style.css 
+05-09-2023	07:58:37 	 ba34bceb-4a4f-469f-bc9c-9ade09244dd6 	 GET 	 undefined 	 /favicon.ico 
+05-09-2023	07:58:47 	 ec030fbc-f928-4bbd-9d8f-89a76324c03b 	 GET 	 undefined 	 /states/KS 
+05-09-2023	07:59:23 	 5b2b204e-932b-4ee7-a43c-ba5c73728c99 	 GET 	 undefined 	 /states/dsfgdsf 
+05-09-2023	08:00:25 	 78d8599c-060d-4eab-85af-54ec934d2a95 	 GET 	 undefined 	 /states/dsfgdsf 
+05-09-2023	08:00:41 	 bcb0b360-094e-4d6f-bb39-5ad990ed3323 	 GET 	 undefined 	 /states/KS 
+05-09-2023	08:01:33 	 d25796e7-34a4-477d-a8d9-627a8d0c65bc 	 GET 	 undefined 	 /states/KS 
+05-09-2023	08:01:49 	 119a2d6f-9fc0-4c60-a454-158b4fe58c7e 	 GET 	 undefined 	 /states/KS 
